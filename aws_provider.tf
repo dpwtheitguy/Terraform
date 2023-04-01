@@ -12,7 +12,7 @@ provider "aws" {
   region        = var.aws_region
   access_key    = var.aws_access_key
   secret_key    = var.aws_secret_key
-  version       = "latest"
+  version       = var.aws_provider_version
 }
 
 ################################################################################
@@ -51,5 +51,17 @@ variable "aws_secret_key" {
   validation {
     condition     = length(var.aws_secret_key) > 0 && can(regex("^[A-Za-z0-9/+=]+$", var.aws_secret_key))
     error_message = "Invalid AWS Secret Key format. The key should be a base64-encoded string."
+  }
+}
+
+variable "aws_provider_version" {
+  type          = string
+  description   = "The version of the AWS provider to use. Defaults to latest."
+  default       = "latest"
+  sensitive     = false
+
+  validation {
+    condition     = can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+$|^latest$", var.aws_provider_version))
+    error_message = "Invalid AWS provider version format. The version should be in the format 'x.y.z' or 'latest'."
   }
 }
