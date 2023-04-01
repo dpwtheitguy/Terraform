@@ -1,4 +1,4 @@
-# provider.tf
+# aws_provider.tf
 # Description: AWS Provider Template
 # Daniel Wilson (daniel.p.wilson@live.com)
 # SPDX-License-Identifier: CC0-1.0
